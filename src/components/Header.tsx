@@ -53,7 +53,7 @@ const Header: React.FC<HeaderProps> = ({ onLogout }) => {
             aria-label="Toggle theme"
           >
             {isDark ? (
-              <Sun className="text-gray-600 dark:text-gray-300" size={20} />
+              <Sun className="text-gray-600 dark:text-gray-300\" size={20} />
             ) : (
               <Moon className="text-gray-600 dark:text-gray-300" size={20} />
             )}
