@@ -1,10 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import Header from './components/Header';
 import Dashboard from './components/Dashboard';
+import Login from './components/Login';
 import { initialPlatforms } from './data/initialData';
 
 function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  const handleLogin = (email: string, password: string) => {
+    // In a real application, you would validate credentials here
+    setIsAuthenticated(true);
+  };
+
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+  };
+
+  if (!isAuthenticated) {
+    return <Login onLogin={handleLogin} />;
+  }
+
   return (
     <motion.div 
       className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-200"
@@ -12,7 +28,7 @@ function App() {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
-      <Header />
+      <Header onLogout={handleLogout} />
       <main className="container mx-auto py-6">
         <Dashboard initialPlatforms={initialPlatforms} />
       </main>

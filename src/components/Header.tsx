@@ -1,11 +1,14 @@
 import React from 'react';
-import { MessageSquare, Clock, Sun, Moon, User } from 'lucide-react';
+import { MessageSquare, Clock, Sun, Moon, User, LogOut } from 'lucide-react';
 import { useTheme } from '../hooks/useTheme';
 
-const Header: React.FC = () => {
+interface HeaderProps {
+  onLogout: () => void;
+}
+
+const Header: React.FC<HeaderProps> = ({ onLogout }) => {
   const { isDark, toggleTheme } = useTheme();
   
-  // Get current time in HH:MM format
   const getCurrentTime = () => {
     const now = new Date();
     return now.toLocaleTimeString('pt-BR', { 
@@ -18,7 +21,6 @@ const Header: React.FC = () => {
   const [time, setTime] = React.useState(getCurrentTime());
   
   React.useEffect(() => {
-    // Update time every minute
     const intervalId = setInterval(() => {
       setTime(getCurrentTime());
     }, 60000);
@@ -51,10 +53,17 @@ const Header: React.FC = () => {
             aria-label="Toggle theme"
           >
             {isDark ? (
-              <Sun className="text-gray-600 dark:text-gray-300\" size={20} />
+              <Sun className="text-gray-600 dark:text-gray-300" size={20} />
             ) : (
               <Moon className="text-gray-600 dark:text-gray-300" size={20} />
             )}
+          </button>
+          <button
+            onClick={onLogout}
+            className="flex items-center space-x-1 text-gray-600 dark:text-gray-300 hover:text-red-500 dark:hover:text-red-400 transition-colors duration-200"
+          >
+            <LogOut size={20} />
+            <span className="text-sm font-medium">Sair</span>
           </button>
         </div>
       </div>
