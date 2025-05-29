@@ -1,5 +1,5 @@
 import React from 'react';
-import { MessageSquare, Clock, Sun, Moon } from 'lucide-react';
+import { MessageSquare, Clock, Sun, Moon, User } from 'lucide-react';
 import { useTheme } from '../hooks/useTheme';
 
 const Header: React.FC = () => {
@@ -33,7 +33,14 @@ const Header: React.FC = () => {
           <MessageSquare className="text-indigo-600 dark:text-indigo-400 mr-2" size={24} />
           <h1 className="text-xl font-semibold text-gray-800 dark:text-white">Dashboard de Mensagens</h1>
         </div>
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-6">
+          <div className="flex items-center space-x-2">
+            <User size={16} className="text-gray-600 dark:text-gray-300" />
+            <div className="text-sm">
+              <p className="font-medium text-gray-800 dark:text-white">João Silva</p>
+              <p className="text-gray-500 dark:text-gray-400">joao.silva@empresa.com</p>
+            </div>
+          </div>
           <div className="flex items-center text-gray-600 dark:text-gray-300">
             <Clock size={16} className="mr-1" />
             <span className="text-sm font-medium">{time}</span>
@@ -44,7 +51,7 @@ const Header: React.FC = () => {
             aria-label="Toggle theme"
           >
             {isDark ? (
-              <Sun className="text-gray-600 dark:text-gray-300\" size={20} />
+              <Sun className="text-gray-600 dark:text-gray-300" size={20} />
             ) : (
               <Moon className="text-gray-600 dark:text-gray-300" size={20} />
             )}
