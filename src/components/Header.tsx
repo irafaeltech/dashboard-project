@@ -37,8 +37,8 @@ const Header: React.FC = () => {
           <div className="flex items-center space-x-2">
             <User size={16} className="text-gray-600 dark:text-gray-300" />
             <div className="text-sm">
-              <p className="font-medium text-gray-800 dark:text-white">João Silva</p>
-              <p className="text-gray-500 dark:text-gray-400">joao.silva@empresa.com</p>
+              <p className="font-medium text-gray-800 dark:text-white">Emerson Rocha</p>
+              <p className="text-gray-500 dark:text-gray-400">emerson.rocha@erconsultoria.com</p>
             </div>
           </div>
           <div className="flex items-center text-gray-600 dark:text-gray-300">
