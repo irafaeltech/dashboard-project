@@ -8,8 +8,7 @@ import { initialPlatforms } from './data/initialData';
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  const handleLogin = (email: string, password: string) => {
-    // In a real application, you would validate credentials here
+  const handleLogin = () => {
     setIsAuthenticated(true);
   };
 
