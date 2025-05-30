@@ -70,15 +70,32 @@ const PlatformCard: React.FC<PlatformCardProps> = ({ platform, previousCounts = 
         </div>
       </div>
       
-      <div>
-        {platform.companies.map(company => (
-          <CompanyRow 
-            key={company.id} 
-            company={company} 
-            color={platform.color}
-            previousCount={previousCounts[company.id]}
-          />
-        ))}
+      <div className="space-y-4">
+        <div>
+          {platform.companies.map(company => (
+            <CompanyRow 
+              key={company.id} 
+              company={company} 
+              color={platform.color}
+              previousCount={previousCounts[company.id]}
+            />
+          ))}
+        </div>
+        
+        <motion.button
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+          className="w-full py-2 px-4 rounded-lg bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 
+                   text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600 
+                   transition-colors duration-150 ease-in-out flex items-center justify-center space-x-2"
+          style={{ 
+            borderColor: platform.color + '40',
+            color: platform.color
+          }}
+        >
+          <LucideIcons.Plus size={16} />
+          <span>Adicionar Conta</span>
+        </motion.button>
       </div>
     </motion.div>
   );
