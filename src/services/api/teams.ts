@@ -1,4 +1,4 @@
-import { Client } from "@microsoft/microsoft-graph-client";
+import { Client } from '@microsoft/microsoft-graph-client/lib/es/Client.js';
 
 export class TeamsService {
   private client: Client;

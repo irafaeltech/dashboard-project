@@ -1,4 +1,4 @@
-import { google } from 'googleapis';
+import { google } from 'googleapis/build/src/index.js';
 import { OAuth2Client } from 'google-auth-library';
 
 export class GoogleMeetService {
