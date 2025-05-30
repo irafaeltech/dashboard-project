@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
+import * as LucideIcons from 'lucide-react';
 
 interface ModalProps {
   isOpen: boolean;
@@ -13,7 +14,7 @@ interface ModalProps {
 }
 
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, platform }) => {
-  const IconComponent = require('lucide-react')[platform.icon];
+  const IconComponent = LucideIcons[platform.icon as keyof typeof LucideIcons];
 
   return (
     <AnimatePresence>
