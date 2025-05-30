@@ -2,6 +2,9 @@ import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
 import * as LucideIcons from 'lucide-react';
+import { TeamsService } from '../services/api/teams';
+import { ZoomService } from '../services/api/zoom';
+import { GoogleMeetService } from '../services/api/meet';
 
 interface ModalProps {
   isOpen: boolean;
@@ -15,6 +18,34 @@ interface ModalProps {
 
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, platform }) => {
   const IconComponent = LucideIcons[platform.icon as keyof typeof LucideIcons];
+
+  const handleConnect = async () => {
+    try {
+      let success = false;
+      
+      switch (platform.name) {
+        case 'Microsoft Teams':
+          const teamsService = new TeamsService('');
+          success = await teamsService.connect('your-client-id', 'your-client-secret');
+          break;
+        case 'Zoom':
+          const zoomService = new ZoomService('your-api-key', 'your-api-secret');
+          success = await zoomService.connect('your-client-id', 'your-client-secret');
+          break;
+        case 'Google Meet':
+          const meetService = new GoogleMeetService('your-client-id', 'your-client-secret');
+          success = await meetService.connect();
+          break;
+      }
+
+      if (success) {
+        onClose();
+        // Handle successful connection
+      }
+    } catch (error) {
+      console.error('Error connecting to platform:', error);
+    }
+  };
 
   return (
     <AnimatePresence>
@@ -55,40 +86,15 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, platform }) => {
               </div>
 
               <div className="space-y-4">
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg 
-                             bg-white dark:bg-gray-700 text-gray-900 dark:text-white
-                             focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
-                    style={{ focusRing: platform.color }}
-                  />
-                </div>
-                <div>
-                  <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                    Senha
-                  </label>
-                  <input
-                    type="password"
-                    id="password"
-                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg 
-                             bg-white dark:bg-gray-700 text-gray-900 dark:text-white
-                             focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
-                    style={{ focusRing: platform.color }}
-                  />
-                </div>
                 <motion.button
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
+                  onClick={handleConnect}
                   className="w-full py-2.5 px-4 rounded-lg text-white font-medium 
                            shadow-sm hover:opacity-90 transition-opacity"
                   style={{ backgroundColor: platform.color }}
                 >
-                  Conectar Conta
+                  Conectar com {platform.name}
                 </motion.button>
               </div>
             </div>
