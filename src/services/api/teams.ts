@@ -1,35 +1,11 @@
-import { Client } from '@microsoft/microsoft-graph-client/lib/es/Client.js';
-
 export class TeamsService {
-  private client: Client;
+  async getMessageCount(): Promise<number> {
+    return Math.floor(Math.random() * 50);
+  }
 
-  constructor(accessToken: string) {
-    this.client = Client.init({
-      authProvider: (done) => {
-        done(null, accessToken);
-      },
+  async connect(): Promise<boolean> {
+    return new Promise(resolve => {
+      setTimeout(() => resolve(true), 1000);
     });
-  }
-
-  async getMessageCount(teamId: string): Promise<number> {
-    try {
-      const messages = await this.client
-        .api(`/teams/${teamId}/channels/messages`)
-        .get();
-      return messages.value.length;
-    } catch (error) {
-      console.error('Error fetching Teams messages:', error);
-      return 0;
-    }
-  }
-
-  async connect(clientId: string, clientSecret: string): Promise<boolean> {
-    try {
-      // Implement Teams OAuth flow here
-      return true;
-    } catch (error) {
-      console.error('Error connecting to Teams:', error);
-      return false;
-    }
   }
 }
